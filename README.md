@@ -1,4 +1,4 @@
-# 🎬 Subtitle FPS Changer Pro
+# 🎬 Subtitle FPS Changer
 
 Bu proje, altyazı dosyalarınızın (.srt) zamanlamasını farklı FPS değerlerine (örneğin 24.000 FPS'den 25.000 FPS'ye) hızlı ve toplu bir şekilde dönüştürmenize olanak sağlayan web tabanlı bir araçtır.
 
@@ -40,7 +40,7 @@ Bu araç aşağıdaki teknolojiler kullanılarak geliştirilmiştir:
 *Bu proje, film ve dizi severlerin altyazı senkronizasyon sorunlarını en hızlı şekilde çözebilmesi için tasarlanmıştır.*
 
 
-# 🎬 Subtitle FPS Changer Pro
+# 🎬 Subtitle FPS Changer
 
 A high-performance, web-based tool designed to batch convert subtitle (.srt) files between different frame rates (FPS). Sync your subtitles perfectly with your video files in seconds.
 
