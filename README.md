@@ -1,8 +1,9 @@
 # 🎬 Subtitle FPS Changer
 
+[lonedev90.github.io/Subtitle-fps-changer/](https://lonedev90.github.io/Subtitle-fps-changer/)
+
+
 Bu proje, altyazı dosyalarınızın (.srt) zamanlamasını farklı FPS değerlerine (örneğin 24.000 FPS'den 25.000 FPS'ye) hızlı ve toplu bir şekilde dönüştürmenize olanak sağlayan web tabanlı bir araçtır.
-
-
 
 ## ✨ Özellikler
 
@@ -15,7 +16,7 @@ Bu proje, altyazı dosyalarınızın (.srt) zamanlamasını farklı FPS değerle
 
 ## 🚀 Nasıl Kullanılır?
 
-1. **Sayfayı Açın:** [lonedev90.github.io/Subtitle-fps-changer/](https://lonedev90.github.io/Subtitle-fps-changer/) adresine gidin.
+1. **Sayfayı Açın:**
 2. **Dosya Seçin:** "SRT Dosyalarını Seçin" butonu ile altyazılarınızı yükleyin.
 3. **FPS Ayarlayın:** Kaynak (mevcut) FPS değerini ve dönüştürmek istediğiniz hedef FPS değerini seçin.
 4. **Dönüştür:** "Dönüştür ve .ZIP İndir" butonuna tıklayın.
@@ -57,7 +58,7 @@ A high-performance, web-based tool designed to batch convert subtitle (.srt) fil
 
 ## 🚀 How to Use?
 
-1. **Visit the App:** Navigate to [lonedev90.github.io/Subtitle-fps-changer/](https://lonedev90.github.io/Subtitle-fps-changer/).
+1. **Visit the App:**
 2. **Select Files:** Click the "Select Subtitles" button and upload your `.srt` files.
 3. **Configure FPS:** Choose the **Source FPS** (current) and **Target FPS** (desired).
 4. **Convert:** Click the "Convert and Download .ZIP" button.
