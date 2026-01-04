@@ -1,6 +1,45 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
+<html lang="en-US"><head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Subtitle-fps-changer</title>
+<meta name="generator" content="Jekyll v3.10.0">
+<meta property="og:title" content="Subtitle-fps-changer">
+<meta property="og:locale" content="en_US">
+<link rel="canonical" href="https://lonedev90.github.io/Subtitle-fps-changer/">
+<meta property="og:url" content="https://lonedev90.github.io/Subtitle-fps-changer/">
+<meta property="og:site_name" content="Subtitle-fps-changer">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Subtitle-fps-changer">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","headline":"Subtitle-fps-changer","name":"Subtitle-fps-changer","url":"https://lonedev90.github.io/Subtitle-fps-changer/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <style class="anchorjs"></style><link rel="stylesheet" href="/Subtitle-fps-changer/assets/css/style.css?v=77b6fb1303a73ef30f3fff242c0990f8ec0a8025">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/Subtitle-fps-changer/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://lonedev90.github.io/Subtitle-fps-changer/">Subtitle-fps-changer</a></h1>
+      
+
+      <p></p>
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subtitle FPS Converter</title>
@@ -98,16 +137,16 @@
         .bar-fill { background: var(--accent); height: 100%; width: 0%; transition: width 0.3s; }
         #status { font-size: 0.8rem; color: #666; margin-top: 5px; text-align: center; }
     </style>
-</head>
-<body>
+
+
 
 <div class="card">
     <form id="converterForm">
-        <h2>Subtitle FPS Converter</h2>
+        <h2 id="subtitle-fps-converter">Subtitle FPS Converter<a class="anchorjs-link " href="#subtitle-fps-converter" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
         
         <div class="group">
             <label>Select Files (.srt)</label>
-            <input type="file" id="files" accept=".srt" multiple>
+            <input type="file" id="files" accept=".srt" multiple="">
         </div>
 
         <div class="row">
@@ -115,7 +154,7 @@
                 <label>Source Fps</label>
                 <select id="srcFps">
                     <option value="23.976">23,976</option>
-                    <option value="24.000" selected>24,000</option>
+                    <option value="24.000" selected="">24,000</option>
                     <option value="25.000">25,000</option>
                     <option value="29.970">29,970</option>
                     <option value="30.000">30,000</option>
@@ -126,7 +165,7 @@
                 <select id="dstFps">
                     <option value="23.976">23,976</option>
                     <option value="24.000">24,000</option>
-                    <option value="25.000" selected>25,000</option>
+                    <option value="25.000" selected="">25,000</option>
                     <option value="29.970">29,970</option>
                     <option value="30.000">30,000</option>
                 </select>
@@ -220,5 +259,14 @@
     };
 </script>
 
-</body>
-</html>
+
+
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  
+
+</body></html>
