@@ -44,8 +44,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subtitle FPS Converter</title>
     
-    <link rel="icon" type="image/png" href="subtitle fps changer.jpg">
-    
+    ![subtitle fps changer](https://github.com/user-attachments/assets/820b8846-edae-4c3e-8b15-9d9e86bc58f6)
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <style>
         :root {
