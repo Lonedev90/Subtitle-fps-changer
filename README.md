@@ -1,1 +1,224 @@
-# Subtitle-fps-changer
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subtitle FPS Converter</title>
+    
+    <link rel="icon" type="image/png" href="subtitle fps changer.jpg">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <style>
+        :root {
+            --primary: #2c3e50; /* Logodaki Lacivert */
+            --accent: #fbc02d;  /* Logodaki Sarı */
+        }
+
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh;
+            
+            /* Arka Plan: Küçük küçük döşeme ayarı */
+            background-image: url('subtitle fps changer.jpg');
+            background-repeat: repeat; /* Görseli tekrar et */
+            background-size: 70px 70px; /* Her bir logoyu 10x10 px yap */
+            background-attachment: fixed;
+        }
+
+        /* Sayfanın üzerine hafif bir karartma ekleyerek formun okunmasını kolaylaştırır */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.4); 
+            z-index: -1;
+        }
+
+        .card { 
+            background: rgba(255, 255, 255, 0.98); 
+            padding: 2.5rem; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+            width: 100%; 
+            max-width: 450px;
+            border-top: 5px solid var(--accent);
+        }
+
+        h2 { 
+            text-align: center; 
+            color: var(--primary); 
+            margin-top: 0; 
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+
+        .group { display: flex; flex-direction: column; margin-bottom: 15px; }
+        .row { display: flex; gap: 10px; margin-bottom: 15px; }
+        
+        label { 
+            font-size: 0.8rem; 
+            margin-bottom: 5px; 
+            color: #555; 
+            font-weight: bold; 
+            text-transform: uppercase;
+        }
+
+        select, input[type="file"] { 
+            padding: 10px; 
+            border: 1px solid #ddd; 
+            border-radius: 6px; 
+            outline: none; 
+            background: #fff;
+        }
+
+        button { 
+            background: var(--primary); 
+            color: white; 
+            border: none; 
+            padding: 14px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            width: 100%; 
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+
+        button:hover { 
+            background: #1a252f; 
+            transform: scale(1.01);
+        }
+
+        #progressBox { display: none; margin-top: 20px; }
+        .bar-bg { background: #eee; height: 10px; border-radius: 5px; overflow: hidden; }
+        .bar-fill { background: var(--accent); height: 100%; width: 0%; transition: width 0.3s; }
+        #status { font-size: 0.8rem; color: #666; margin-top: 5px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <form id="converterForm">
+        <h2>Subtitle FPS Converter</h2>
+        
+        <div class="group">
+            <label>Select Files (.srt)</label>
+            <input type="file" id="files" accept=".srt" multiple>
+        </div>
+
+        <div class="row">
+            <div class="group" style="flex:1;">
+                <label>Source Fps</label>
+                <select id="srcFps">
+                    <option value="23.976">23,976</option>
+                    <option value="24.000" selected>24,000</option>
+                    <option value="25.000">25,000</option>
+                    <option value="29.970">29,970</option>
+                    <option value="30.000">30,000</option>
+                </select>
+            </div>
+            <div class="group" style="flex:1;">
+                <label>Target Fps</label>
+                <select id="dstFps">
+                    <option value="23.976">23,976</option>
+                    <option value="24.000">24,000</option>
+                    <option value="25.000" selected>25,000</option>
+                    <option value="29.970">29,970</option>
+                    <option value="30.000">30,000</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="button" id="startBtn">Convert and Download .ZIP İndir</button>
+
+        <div id="progressBox">
+            <div class="bar-bg"><div id="bar" class="bar-fill"></div></div>
+            <div id="status">Hazır</div>
+        </div>
+    </form>
+</div>
+
+<script>
+    // F5 yapınca sayfayı ve formu tamamen temizle
+    window.onload = () => { 
+        document.getElementById('converterForm').reset(); 
+    };
+
+    function convertTime(timeStr, ratio) {
+        const parts = timeStr.split(/[:,]/);
+        const ms = (parseInt(parts[0]) * 3600000) + (parseInt(parts[1]) * 60000) + (parseInt(parts[2]) * 1000) + parseInt(parts[3]);
+        const newMs = ms * ratio;
+        const h = Math.floor(newMs / 3600000);
+        const m = Math.floor((newMs % 3600000) / 60000);
+        const s = Math.floor((newMs % 60000) / 1000);
+        const mil = Math.round(newMs % 1000);
+        return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')},${String(mil).padStart(3, '0')}`;
+    }
+
+    document.getElementById('startBtn').onclick = async () => {
+        const fileInput = document.getElementById('files');
+        if (fileInput.files.length === 0) return alert("Dosya seçmediniz!");
+
+        const sFpsTxt = document.getElementById('srcFps').options[document.getElementById('srcFps').selectedIndex].text;
+        const tFpsTxt = document.getElementById('dstFps').options[document.getElementById('dstFps').selectedIndex].text;
+        const ratio = parseFloat(document.getElementById('srcFps').value) / parseFloat(document.getElementById('dstFps').value);
+
+        const zip = new JSZip();
+        // C# projenizdeki rapor formatı
+        let report = "============================================\n";
+        report += "SUBTITLE FPS CONVERSION REPORT\n";
+        report += `Date: ${new Date().toLocaleString()}\n`;
+        report += "============================================\n\n";
+
+        document.getElementById('progressBox').style.display = 'block';
+
+        for (let i = 0; i < fileInput.files.length; i++) {
+            const file = fileInput.files[i];
+            document.getElementById('status').innerText = `İşleniyor: ${file.name}`;
+            
+            const buffer = await file.arrayBuffer();
+            const content = new TextDecoder('windows-1254').decode(buffer); // Türkçe karakter desteği
+            const lines = content.split(/\r?\n/);
+            const newLines = [];
+            let timeInfo = "";
+            let found = false;
+            const pattern = /(\d{2}:\d{2}:\d{2},\d{3})/g;
+
+            lines.forEach(line => {
+                if (line.match(pattern)) {
+                    const newLine = line.replace(pattern, m => convertTime(m, ratio));
+                    if (!found) {
+                        timeInfo = `File Name: ${file.name}\nOld ${sFpsTxt} fps: ${line}\nNew ${tFpsTxt} fps: ${newLine}\n--------------------------------------------\n`;
+                        found = true;
+                    }
+                    newLines.push(newLine);
+                } else { newLines.push(line); }
+            });
+
+            report += timeInfo;
+            const newFileName = file.name.replace('.srt', '') + `_${tFpsTxt}fps.srt`;
+            zip.file(newFileName, newLines.join('\n'));
+            document.getElementById('bar').style.width = ((i + 1) / fileInput.files.length * 100) + '%';
+        }
+
+        zip.file("Subtitle Fps Conversion Report.txt", report); // Rapor dosyası ekleme
+        
+        const zipData = await zip.generateAsync({type: "blob"});
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(zipData);
+        
+        // Mevcut dosya adını .zip yapma
+        const firstFile = fileInput.files[0].name;
+        link.download = firstFile.substring(0, firstFile.lastIndexOf('.')) + ".zip";
+        
+        link.click();
+        document.getElementById('status').innerText = "Tamamlandı!";
+    };
+</script>
+
+</body>
+</html>
