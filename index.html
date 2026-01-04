@@ -54,37 +54,43 @@
         }
 
         body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            margin: 0;
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh;
-            
-            /* Arka Plan: Küçük küçük döşeme ayarı */
-            background-image: url('https://github.com/Lonedev90/Subtitle-fps-changer/blob/main/subtitle%20fps%20changer.jpg');
-            background-repeat: repeat; /* Görseli tekrar et */
-            background-size: 70px 70px; /* Her bir logoyu 10x10 px yap */
-            background-attachment: fixed;
-        }
+    font-family: 'Segoe UI', Tahoma, sans-serif; 
+    margin: 0;
+    
+    /* TAM MERKEZLEME AYARI */
+    display: flex; 
+    justify-content: center; /* Yatayda merkezler */
+    align-items: center;     /* Dikeyde merkezler */
+    min-height: 100vh;       /* Ekran yüksekliğinin tamamını kullanır */
 
-        /* Sayfanın üzerine hafif bir karartma ekleyerek formun okunmasını kolaylaştırır */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.4); 
-            z-index: -1;
-        }
+    /* ARKA PLAN AYARI */
+    /* GitHub Raw linki kullanıldı */
+    background-image: url('https://raw.githubusercontent.com/Lonedev90/Subtitle-fps-changer/main/subtitle%20fps%20changer.jpg');
+    background-repeat: repeat; 
+    background-size: 70px 70px; /* İstediğiniz 25x25 px boyutu */
+    background-attachment: fixed;
+}
 
-        .card { 
-            background: rgba(255, 255, 255, 0.98); 
-            padding: 2.5rem; 
-            border-radius: 15px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
-            width: 100%; 
-            max-width: 450px;
-            border-top: 5px solid var(--accent);
+/* Formun daha belirgin olması için arka plana hafif bir beyazlık */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255, 255, 255, 0.4); 
+    z-index: -1;
+}
+
+.card { 
+    background: white; 
+    padding: 2.5rem; 
+    border-radius: 15px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+    width: 90%; 
+    max-width: 420px;
+    border-top: 5px solid #fbc02d; /* Sarı Logo Rengi */
+    position: relative;
+    z-index: 1;
+}
         }
 
         h2 { 
@@ -270,5 +276,6 @@
   
 
 </body></html>
+
 
 
