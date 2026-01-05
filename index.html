@@ -1,45 +1,6 @@
-<html lang="en-US"><script type="text/javascript" src="moz-extension://74deb403-83b8-4752-be30-431c321d3f5e/inject.js"></script><head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Subtitle-fps-changer</title>
-<meta name="generator" content="Jekyll v3.10.0">
-<meta property="og:title" content="Subtitle-fps-changer">
-<meta property="og:locale" content="en_US">
-<link rel="canonical" href="">
-<meta property="og:url" content="">
-<meta property="og:site_name" content="Subtitle-fps-changer">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="Subtitle-fps-changer">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","headline":"Subtitle-fps-changer","name":"Subtitle-fps-changer","url":""}</script>
-<!-- End Jekyll SEO tag -->
-
-    <style class="anchorjs"></style><link rel="stylesheet" href="/Subtitle-fps-changer/assets/css/style.css?v=77b6fb1303a73ef30f3fff242c0990f8ec0a8025">
-    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
-
-<!-- Setup Google Analytics -->
-
-
-
-<!-- You can set your favicon here -->
-<!-- link rel="shortcut icon" type="image/x-icon" href="/Subtitle-fps-changer/favicon.ico" -->
-
-<!-- end custom head snippets -->
-
-  </head>
-  <body>
-    <div class="container-lg px-3 my-5 markdown-body">
-      
-      <h1><a href=""></a></h1>
-      
-
-      <p></p>
-
-
+<!DOCTYPE html>
+<html lang="tr">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subtitle FPS Converter</title>
@@ -49,48 +10,39 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <style>
         :root {
-            --primary: #2c3e50; /* Logodaki Lacivert */
-            --accent: #fbc02d;  /* Logodaki Sarı */
+            --primary: #2c3e50;
+            --accent: #fbc02d;
         }
 
         body { 
-    font-family: 'Segoe UI', Tahoma, sans-serif; 
-    margin: 0;
-    
-    /* TAM MERKEZLEME AYARI */
-    display: flex; 
-    justify-content: center; /* Yatayda merkezler */
-    align-items: center;     /* Dikeyde merkezler */
-    min-height: 100vh;       /* Ekran yüksekliğinin tamamını kullanır */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh;
+            background-image: url('subtitle fps changer.jpg');
+            background-repeat: repeat;
+            background-size: 70px 70px;
+            background-attachment: fixed;
+        }
 
-    /* ARKA PLAN AYARI */
-    /* GitHub Raw linki kullanıldı */
-    background-image: url('https://raw.githubusercontent.com/Lonedev90/Subtitle-fps-changer/main/subtitle%20fps%20changer.jpg');
-    background-repeat: repeat; 
-    background-size: 70px 70px; /* İstediğiniz 25x25 px boyutu */
-    background-attachment: fixed;
-}
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.4); 
+            z-index: -1;
+        }
 
-/* Formun daha belirgin olması için arka plana hafif bir beyazlık */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(255, 255, 255, 0.4); 
-    z-index: -1;
-}
-
-.card { 
-    background: white; 
-    padding: 2.5rem; 
-    border-radius: 15px; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
-    width: 90%; 
-    max-width: 420px;
-    border-top: 5px solid #fbc02d; /* Sarı Logo Rengi */
-    position: relative;
-    z-index: 1;
-}
+        .card { 
+            background: rgba(255, 255, 255, 0.98); 
+            padding: 2.5rem; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+            width: 100%; 
+            max-width: 450px;
+            border-top: 5px solid var(--accent);
         }
 
         h2 { 
@@ -143,16 +95,16 @@ body::before {
         .bar-fill { background: var(--accent); height: 100%; width: 0%; transition: width 0.3s; }
         #status { font-size: 0.8rem; color: #666; margin-top: 5px; text-align: center; }
     </style>
-
-
+</head>
+<body>
 
 <div class="card">
     <form id="converterForm">
-        <h2 id="subtitle-fps-converter">Subtitle FPS Converter<a class="anchorjs-link " href="#subtitle-fps-converter" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+        <h2>Subtitle FPS Converter</h2>
         
         <div class="group">
             <label>Select Files (.srt)</label>
-            <input type="file" id="files" accept=".srt" multiple="">
+            <input type="file" id="files" accept=".srt" multiple>
         </div>
 
         <div class="row">
@@ -160,7 +112,7 @@ body::before {
                 <label>Source Fps</label>
                 <select id="srcFps">
                     <option value="23.976">23,976</option>
-                    <option value="24.000" selected="">24,000</option>
+                    <option value="24.000" selected>24,000</option>
                     <option value="25.000">25,000</option>
                     <option value="29.970">29,970</option>
                     <option value="30.000">30,000</option>
@@ -171,14 +123,14 @@ body::before {
                 <select id="dstFps">
                     <option value="23.976">23,976</option>
                     <option value="24.000">24,000</option>
-                    <option value="25.000" selected="">25,000</option>
+                    <option value="25.000" selected>25,000</option>
                     <option value="29.970">29,970</option>
                     <option value="30.000">30,000</option>
                 </select>
             </div>
         </div>
 
-        <button type="button" id="startBtn">Convert and Download .ZIP İndir</button>
+        <button type="button" id="startBtn">Convert and Download .ZIP</button>
 
         <div id="progressBox">
             <div class="bar-bg"><div id="bar" class="bar-fill"></div></div>
@@ -188,7 +140,6 @@ body::before {
 </div>
 
 <script>
-    // F5 yapınca sayfayı ve formu tamamen temizle
     window.onload = () => { 
         document.getElementById('converterForm').reset(); 
     };
@@ -206,14 +157,13 @@ body::before {
 
     document.getElementById('startBtn').onclick = async () => {
         const fileInput = document.getElementById('files');
-        if (fileInput.files.length === 0) return alert("You have not selected a file!");
+        if (fileInput.files.length === 0) return alert("Dosya seçmediniz!");
 
         const sFpsTxt = document.getElementById('srcFps').options[document.getElementById('srcFps').selectedIndex].text;
         const tFpsTxt = document.getElementById('dstFps').options[document.getElementById('dstFps').selectedIndex].text;
         const ratio = parseFloat(document.getElementById('srcFps').value) / parseFloat(document.getElementById('dstFps').value);
 
         const zip = new JSZip();
-        // C# projenizdeki rapor formatı
         let report = "============================================\n";
         report += "SUBTITLE FPS CONVERSION REPORT\n";
         report += `Date: ${new Date().toLocaleString()}\n`;
@@ -226,7 +176,7 @@ body::before {
             document.getElementById('status').innerText = `İşleniyor: ${file.name}`;
             
             const buffer = await file.arrayBuffer();
-            const content = new TextDecoder('windows-1254').decode(buffer); // Türkçe karakter desteği
+            const content = new TextDecoder('windows-1254').decode(buffer);
             const lines = content.split(/\r?\n/);
             const newLines = [];
             let timeInfo = "";
@@ -234,14 +184,23 @@ body::before {
             const pattern = /(\d{2}:\d{2}:\d{2},\d{3})/g;
 
             lines.forEach(line => {
-                if (line.match(pattern)) {
+                const matches = line.match(pattern);
+                if (matches) {
+                    // Tüm zaman kodlarını dönüştür (dosya içeriği için)
                     const newLine = line.replace(pattern, m => convertTime(m, ratio));
+                    
                     if (!found) {
-                        timeInfo = `File Name: ${file.name}\nOld ${sFpsTxt} fps: ${line}\nNew ${tFpsTxt} fps: ${newLine}\n--------------------------------------------\n`;
+                        // Rapor için sadece İLK zaman kodunu (başlangıç) al
+                        const oldStartTime = matches[0];
+                        const newStartTime = convertTime(oldStartTime, ratio);
+                        
+                        timeInfo = `File Name: ${file.name}\nOld ${sFpsTxt} fps: ${oldStartTime}\nNew ${tFpsTxt} fps: ${newStartTime}\n--------------------------------------------\n`;
                         found = true;
                     }
                     newLines.push(newLine);
-                } else { newLines.push(line); }
+                } else { 
+                    newLines.push(line); 
+                }
             });
 
             report += timeInfo;
@@ -250,13 +209,12 @@ body::before {
             document.getElementById('bar').style.width = ((i + 1) / fileInput.files.length * 100) + '%';
         }
 
-        zip.file("Subtitle Fps Conversion Report.txt", report); // Rapor dosyası ekleme
+        zip.file("Subtitle Fps Conversion Report.txt", report);
         
         const zipData = await zip.generateAsync({type: "blob"});
         const link = document.createElement('a');
         link.href = URL.createObjectURL(zipData);
         
-        // Mevcut dosya adını .zip yapma
         const firstFile = fileInput.files[0].name;
         link.download = firstFile.substring(0, firstFile.lastIndexOf('.')) + ".zip";
         
@@ -265,17 +223,5 @@ body::before {
     };
 </script>
 
-
-
-
-
-      
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
-    <script>anchors.add();</script>
-  
-
-</body></html>
-
-
-
+</body>
+</html>
