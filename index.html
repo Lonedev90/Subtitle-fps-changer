@@ -157,7 +157,7 @@
 
     document.getElementById('startBtn').onclick = async () => {
         const fileInput = document.getElementById('files');
-        if (fileInput.files.length === 0) return alert("Dosya seçmediniz!");
+        if (fileInput.files.length === 0) return alert("You haven't selected a file!");
 
         const sFpsTxt = document.getElementById('srcFps').options[document.getElementById('srcFps').selectedIndex].text;
         const tFpsTxt = document.getElementById('dstFps').options[document.getElementById('dstFps').selectedIndex].text;
@@ -219,9 +219,10 @@
         link.download = firstFile.substring(0, firstFile.lastIndexOf('.')) + ".zip";
         
         link.click();
-        document.getElementById('status').innerText = "Tamamlandı!";
+        document.getElementById('status').innerText = "Completed!";
     };
 </script>
 
 </body>
 </html>
+
