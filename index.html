@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,6 +64,17 @@
             text-transform: uppercase;
         }
 
+        /* Dosya seçme butonunu İngilizce yapmak için özel stil */
+        input[type="file"]::file-selector-button {
+            background: #fff;
+            color: #555;
+            border: 1px solid #ddd;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            content: "Choose Files"; /* Bazı tarayıcılar için */
+        }
+
         select, input[type="file"] { 
             padding: 10px; 
             border: 1px solid #ddd; 
@@ -72,7 +83,7 @@
             background: #fff;
         }
 
-        button { 
+        button#startBtn { 
             background: var(--primary); 
             color: white; 
             border: none; 
@@ -85,7 +96,7 @@
             transition: 0.2s;
         }
 
-        button:hover { 
+        button#startBtn:hover { 
             background: #1a252f; 
             transform: scale(1.01);
         }
@@ -134,7 +145,7 @@
 
         <div id="progressBox">
             <div class="bar-bg"><div id="bar" class="bar-fill"></div></div>
-            <div id="status">Hazır</div>
+            <div id="status">Ready</div>
         </div>
     </form>
 </div>
@@ -157,7 +168,7 @@
 
     document.getElementById('startBtn').onclick = async () => {
         const fileInput = document.getElementById('files');
-        if (fileInput.files.length === 0) return alert("You haven't selected a file!");
+        if (fileInput.files.length === 0) return alert("Please select files!");
 
         const sFpsTxt = document.getElementById('srcFps').options[document.getElementById('srcFps').selectedIndex].text;
         const tFpsTxt = document.getElementById('dstFps').options[document.getElementById('dstFps').selectedIndex].text;
@@ -173,7 +184,7 @@
 
         for (let i = 0; i < fileInput.files.length; i++) {
             const file = fileInput.files[i];
-            document.getElementById('status').innerText = `İşleniyor: ${file.name}`;
+            document.getElementById('status').innerText = `Processing: ${file.name}`;
             
             const buffer = await file.arrayBuffer();
             const content = new TextDecoder('windows-1254').decode(buffer);
@@ -186,11 +197,11 @@
             lines.forEach(line => {
                 const matches = line.match(pattern);
                 if (matches) {
-                    // Tüm zaman kodlarını dönüştür (dosya içeriği için)
+                    // Tüm zaman kodlarını srt dosyası için dönüştür
                     const newLine = line.replace(pattern, m => convertTime(m, ratio));
                     
                     if (!found) {
-                        // Rapor için sadece İLK zaman kodunu (başlangıç) al
+                        // RAPOR İÇİN: Sadece İLK zaman kodunun BAŞLANGIÇ kısmını al
                         const oldStartTime = matches[0];
                         const newStartTime = convertTime(oldStartTime, ratio);
                         
@@ -225,4 +236,3 @@
 
 </body>
 </html>
-
