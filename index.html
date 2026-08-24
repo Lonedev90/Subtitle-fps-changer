@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,7 +64,6 @@
             text-transform: uppercase;
         }
 
-        /* Dosya seçme butonunu İngilizce yapmak için özel stil */
         input[type="file"]::file-selector-button {
             background: #fff;
             color: #555;
@@ -72,7 +71,6 @@
             padding: 5px 10px;
             border-radius: 4px;
             cursor: pointer;
-            content: "Choose Files"; /* Bazı tarayıcılar için */
         }
 
         select, input[type="file"] { 
@@ -110,7 +108,7 @@
 <body>
 
 <div class="card">
-    <form id="converterForm">
+    <form id="converterForm" onsubmit="return false;">
         <h2>Subtitle FPS Converter</h2>
         
         <div class="group">
@@ -151,10 +149,7 @@
 </div>
 
 <script>
-    window.onload = () => { 
-        document.getElementById('converterForm').reset(); 
-    };
-
+    // Zaman kodunu yeni orana göre hesaplayan fonksiyon
     function convertTime(timeStr, ratio) {
         const parts = timeStr.split(/[:,]/);
         const ms = (parseInt(parts[0]) * 3600000) + (parseInt(parts[1]) * 60000) + (parseInt(parts[2]) * 1000) + parseInt(parts[3]);
@@ -166,72 +161,81 @@
         return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')},${String(mil).padStart(3, '0')}`;
     }
 
-    document.getElementById('startBtn').onclick = async () => {
-        const fileInput = document.getElementById('files');
-        if (fileInput.files.length === 0) return alert("Please select files!");
+    document.addEventListener('DOMContentLoaded', () => {
+        const startBtn = document.getElementById('startBtn');
+        
+        startBtn.addEventListener('click', async () => {
+            const fileInput = document.getElementById('files');
+            if (!fileInput.files || fileInput.files.length === 0) {
+                alert("Please select files!");
+                return;
+            }
 
-        const sFpsTxt = document.getElementById('srcFps').options[document.getElementById('srcFps').selectedIndex].text;
-        const tFpsTxt = document.getElementById('dstFps').options[document.getElementById('dstFps').selectedIndex].text;
-        const ratio = parseFloat(document.getElementById('srcFps').value) / parseFloat(document.getElementById('dstFps').value);
+            const sFpsTxt = document.getElementById('srcFps').options[document.getElementById('srcFps').selectedIndex].text;
+            const tFpsTxt = document.getElementById('dstFps').options[document.getElementById('dstFps').selectedIndex].text;
+            const ratio = parseFloat(document.getElementById('srcFps').value) / parseFloat(document.getElementById('dstFps').value);
 
-        const zip = new JSZip();
-        let report = "============================================\n";
-        report += "SUBTITLE FPS CONVERSION REPORT\n";
-        report += `Date: ${new Date().toLocaleString()}\n`;
-        report += "============================================\n\n";
+            const zip = new JSZip();
+            let report = "============================================\n";
+            report += "SUBTITLE FPS CONVERSION REPORT\n";
+            report += `Date: ${new Date().toLocaleString()}\n`;
+            report += "============================================\n\n";
 
-        document.getElementById('progressBox').style.display = 'block';
+            document.getElementById('progressBox').style.display = 'block';
 
-        for (let i = 0; i < fileInput.files.length; i++) {
-            const file = fileInput.files[i];
-            document.getElementById('status').innerText = `Processing: ${file.name}`;
-            
-            const buffer = await file.arrayBuffer();
-            const content = new TextDecoder('windows-1254').decode(buffer);
-            const lines = content.split(/\r?\n/);
-            const newLines = [];
-            let timeInfo = "";
-            let found = false;
-            const pattern = /(\d{2}:\d{2}:\d{2},\d{3})/g;
+            for (let i = 0; i < fileInput.files.length; i++) {
+                const file = fileInput.files[i];
+                document.getElementById('status').innerText = `Processing: ${file.name}`;
+                
+                // Dosyayı standart metin olarak oku (kodlama ile oynamadan)
+                const text = await file.text();
+                
+                const lines = text.split(/\r?\n/);
+                const newLines = [];
+                let timeInfo = "";
+                let found = false;
+                const pattern = /(\d{2}:\d{2}:\d{2},\d{3})/g;
 
-            lines.forEach(line => {
-                const matches = line.match(pattern);
-                if (matches) {
-                    // Tüm zaman kodlarını srt dosyası için dönüştür
-                    const newLine = line.replace(pattern, m => convertTime(m, ratio));
-                    
-                    if (!found) {
-                        // RAPOR İÇİN: Sadece İLK zaman kodunun BAŞLANGIÇ kısmını al
-                        const oldStartTime = matches[0];
-                        const newStartTime = convertTime(oldStartTime, ratio);
+                lines.forEach(line => {
+                    const matches = line.match(pattern);
+                    if (matches) {
+                        const newLine = line.replace(pattern, m => convertTime(m, ratio));
                         
-                        timeInfo = `File Name: ${file.name}\nOld ${sFpsTxt} fps: ${oldStartTime}\nNew ${tFpsTxt} fps: ${newStartTime}\n--------------------------------------------\n`;
-                        found = true;
+                        if (!found) {
+                            const oldStartTime = matches[0];
+                            const newStartTime = convertTime(oldStartTime, ratio);
+                            
+                            timeInfo = `File Name: ${file.name}\nOld ${sFpsTxt} fps: ${oldStartTime}\nNew ${tFpsTxt} fps: ${newStartTime}\n--------------------------------------------\n`;
+                            found = true;
+                        }
+                        newLines.push(newLine);
+                    } else { 
+                        newLines.push(line); 
                     }
-                    newLines.push(newLine);
-                } else { 
-                    newLines.push(line); 
-                }
-            });
+                });
 
-            report += timeInfo;
-            const newFileName = file.name.replace('.srt', '') + `_${tFpsTxt}fps.srt`;
-            zip.file(newFileName, newLines.join('\n'));
-            document.getElementById('bar').style.width = ((i + 1) / fileInput.files.length * 100) + '%';
-        }
+                report += timeInfo;
+                const newFileName = file.name.replace('.srt', '') + `_${tFpsTxt}fps.srt`;
+                
+                // Dönüştürülmüş metni direkt olarak zip içerisine koy (Blob veya haritalama yok)
+                zip.file(newFileName, newLines.join('\n'));
+                
+                document.getElementById('bar').style.width = ((i + 1) / fileInput.files.length * 100) + '%';
+            }
 
-        zip.file("Subtitle Fps Conversion Report.txt", report);
-        
-        const zipData = await zip.generateAsync({type: "blob"});
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(zipData);
-        
-        const firstFile = fileInput.files[0].name;
-        link.download = firstFile.substring(0, firstFile.lastIndexOf('.')) + ".zip";
-        
-        link.click();
-        document.getElementById('status').innerText = "Completed!";
-    };
+            zip.file("Subtitle Fps Conversion Report.txt", report);
+            
+            const zipData = await zip.generateAsync({type: "blob"});
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(zipData);
+            
+            const firstFile = fileInput.files[0].name;
+            link.download = firstFile.substring(0, firstFile.lastIndexOf('.')) + ".zip";
+            
+            link.click();
+            document.getElementById('status').innerText = "Completed!";
+        });
+    });
 </script>
 
 </body>
