@@ -10,7 +10,7 @@ Bu proje, altyazı dosyalarınızın (.srt) zamanlamasını farklı FPS değerle
 - **Toplu İşlem:** Birden fazla altyazı dosyasını aynı anda yükleyebilir ve dönüştürebilirsiniz.
 - **Akıllı Paketleme:** Dönüştürülen dosyalar, orijinal dosya adı korunarak otomatik olarak bir `.zip` arşivi içinde sunulur.
 - **Detaylı Raporlama:** Her işlem sonunda, zamanlamaların nasıl değiştiğini gösteren (Eski vs Yeni Süre) bir `Subtitle Fps Conversion Report.txt` dosyası oluşturulur.
-- **Karakter Desteği:** Türkçe karakterlerin bozulmaması için otomatik olarak `Windows-1254` kodlamasını kullanır.
+- **Karakter Koruması:** ​Dosyalarınızın orijinal Türkçe karakter yapısı aynen korunur.
 - **Modern Arayüz:** Kullanıcı dostu, logonuzla özelleştirilmiş ve 25x25px tile arka plan tasarımına sahip arayüz.
 - **Sıfırlama Özelliği:** Sayfa yenilendiğinde (F5) tüm veriler ve form otomatik olarak temizlenir.
 
@@ -52,7 +52,7 @@ A high-performance, web-based tool designed to batch convert subtitle (.srt) fil
 - **Batch Processing:** Upload and convert multiple subtitle files simultaneously.
 - **Smart Packaging:** Converted files are automatically bundled into a single `.zip` archive, named after your original file.
 - **Detailed Reporting:** Generates a `Subtitle Fps Conversion Report.txt` for every batch, showing "Old vs New" timestamps for verification.
-- **Turkish Character Support:** Uses `Windows-1254` encoding to prevent any character corruption in Turkish subtitles.
+
 - **Modern & Responsive UI:** Featuring a custom tile background (25x25px) and a user-friendly interface optimized for all devices.
 - **Auto-Reset Function:** The form and all progress data are fully cleared upon page refresh (F5).
 
