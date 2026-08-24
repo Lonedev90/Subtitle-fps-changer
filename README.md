@@ -1,6 +1,23 @@
-# 🎬 Subtitle FPS Changer
+<div align="center">
+
+# Subtitle Fps Changer 🎬
+
+</div>
+
+<div align="center">
 
 [lonedev90.github.io/Subtitle-fps-changer/](https://lonedev90.github.io/Subtitle-fps-changer/)
+
+</div>
+
+
+</div>
+
+---
+
+## 📌 Usage Guide / Kullanım Kılavuzu
+
+![Info](İnfo.png)
 
 
 Bu proje, altyazı dosyalarınızın (.srt) zamanlamasını farklı FPS değerlerine (örneğin 24.000 FPS'den 25.000 FPS'ye) hızlı ve toplu bir şekilde dönüştürmenize olanak sağlayan web tabanlı bir araçtır.
